@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=“Pragma” content=”no-cache”>
+    <meta http-equiv=“Expires” content=”-1″>
+    <meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
+    <link rel="stylesheet" href="../assets/css/navStyle.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-grid.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="../assets/css/hero.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../assets/css/dashNav.css">
+    <link rel="stylesheet" href="../node_modules/@mdi/font/css/materialdesignicons.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <style>
+        .dropbtn {
+          background-color: #4CAF50;
+          color: white;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+        }
+
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+    <title>Barafiri</title>
+</head>
+<body>
+
+    <section class="main">
+        <nav>
+            <div class="dash-nav-bucket">
+                <div class="brand-logo">
+                    <img id="connectimgb" src="" alt="">
+                </div>
+    
+                <div class="dashUserProfile">
+                 
+                    <div class="userPhoto" style="background-image: url('http://localhost:5791/images/king.jpg');">
+                        
+                        
+                    </div>
+
+                    <div class="userName">
+                         <div class="userNameT">
+                            
+                        </div>
+
+                        <div class="dropdown">
+    
+                            <div class="userNameL">
+                            
+                            </div>
+                            <div class="dropdown-content">
+                                <a href="../logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+
+
+            </div>
+        </nav>
+    
+    
+        <section class="dash-section">
+            <div class="servicers-title">
+                <h3>Sorry, you do not have any active services</h3>
+                <h5>click below to add service</h5>
+            </div>
+            <div class="add-service-btn">
+                <h1><i class="mdi mdi-plus"></i></h1>
+            </div>
+          
+        </section>
+    </section>
+   
+
+    <section class="services-bucket">
+
+        <div id="applist" class="service-bucket-container">
+            <!-- <h1>Jones</h1> -->
+
+            <!-- <div class="service">
+                <h1 class="titl">A</h1>
+            </div>
+
+            <div class="service">
+                <h1 class="titl">B</h1>
+            </div>
+
+            <div class="service">
+                <h1 class="titl">C</h1>
+            </div> -->
+        </div>
+
+    </section>
+
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../a.js"></script>
+
+<script>
+    if (localStorage.userObj == undefined) {
+            //console.log("Authentication Successful!!");
+            // let gpiResponse = JSON.parse(localStorage.userObj);
+            // if (gpiResponse.data.User != undefined) {
+            window.location.href = '../login';
+            //}
+        //alert("You Need to be looged in!");
+    }
+    let pageCheck = localStorage.userObj;
+    let gpiResponse = JSON.parse(localStorage.userObj);
+
+    //console.log(gpiResponse.data.User.photo); 
+    let userpic = imagepath+gpiResponse.data.User.photo;
+    $('.userPhoto').css( "background-image", "url("+userpic+")"); //"+gpiResponse.data.User.Photo);
+    $('.userNameT').html(gpiResponse.data.User.name); // .css( "background-image", gpiResponse.data.User.Name);
+    $('.userNameL').text(gpiResponse.data.User.email); //.css( "background-image", gpiResponse.data.User.email);
+
+
+    //"url('http://localhost:5791/images/default.jpeg')" 
+
+
+    const addService = document.querySelector('.add-service-btn');
+    const main = document.querySelector('.main');
+    const servicesBucket = document.querySelector('.services-bucket');
+
+    addService.addEventListener('click', () => {
+        main.classList.toggle('main-open');
+        servicesBucket.classList.toggle('services-bucket-open');
+    });
+
+    $(document).ready( () => {
+        // online status checker
+        //let onlineCheck = document.querySelector('.online-check');
+
+        // login variables
+        //let loginBtn = document.querySelector('#login');
+        
+
+        // registration variables
+        //let registerBtn = document.querySelector('#registerBtn');
+        
+        // user login
+        // loginBtn.click( () => {
+        //loginBtn.addEventListener('click', () => {
+
+        
+        if (navigator.onLine == 1) {
+
+            let xhr = new XMLHttpRequest();
+            let url = serverpath+'apps';
+            //let extcounter = 0;
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200){
+                    console.log(JSON.parse(this.responseText));
+                    
+                    appsdata = JSON.parse(this.responseText);
+                    let appsiterator = appsdata.data;
+                    let colcounter = 0;
+
+                    let applisting = '<div class="row">';
+                    Object.keys(appsiterator).forEach(function(key,index) {
+                                                
+                        let apppic = imagepath+appsiterator[index].photo; //gpiResponse.data.User.photo;
+                        //<div class="userPhoto" style="background-image: url('http://localhost:5791/images/king.jpg');"> 
+                        //style="background-image: url('+apppic+');"
+                        applisting = applisting + '<div class="service col-sm-4"><img src="'+apppic+'" alt=""><br />'+appsiterator[index].name+'</div>';
+                        colcounter++;
+                        // if (colcounter === 3) {
+                        //     colcounter = 0;
+                        //     applisting = applisting + '</div><div class="row">';
+
+                        // }
+                    });
+                    var allbody = document.getElementById("applist");
+                    allbody.innerHTML = applisting+'</div>';
+                } else if (this.readyState === 4 && this.status === 0) {
+                    alert("Backend server down");
+                    window.location = "../logout";
+                } else if (this.status === 401) {
+                    window.location = "../logout";
+                }
+
+            };
+            xhr.open("GET", url, true);
+            //xhr.setRequestHeader("Content-type", "application/json;");
+            //xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xhr.setRequestHeader("Authorization", "Bearer " + gpiResponse.data.data.token);
+            xhr.send();
+            //xhr.send(JSON.stringify({ password: 'kingstarr', email: 'kingsley.ifedayo@my-gpi.io' }));
+
+        } else {
+            // if the browser is offline, display offline message
+            let showBadNet = () => {
+                onlineCheck.style.top = '3rem';
+            }
+
+            let hideBadNet = () => {
+                onlineCheck.style.top = '-5rem';
+            }
+
+            setTimeout(showBadNet, 500);
+            setTimeout(hideBadNet, 4000); 
+        }
+
+    });
+
+</script>
+
+
+<script>
+    $().scr = imagepath+'GPI-logo.png';
+    // let day;
+    // for (day = 1; day <= 7; day++){
+    //     setTimeout(counter, (day * 2200), day);
+    // }
+
+    // function counter(cd) {
+        
+    //     setTimeout(currentDay, 900, cd);
+    //     setTimeout(bath, 1000);
+    //     setTimeout(eat, 1300);
+    //     setTimeout(sleep, 1600);
+    //     setTimeout(code, 1900);
+    //     if(cd === 7){
+    //         fd = console.log('F I N A L - D A Y !');
+    //         remark = console.log('WE MOVE!!!!!');
+    //         setTimeout(fd, 800)
+    //         setTimeout(fd, 2000)
+    //     }
+
+    // }
+
+
+    // function currentDay(cd){
+    //     let activity = "Day " + cd;
+    //     console.log(activity)
+    // };
+
+    // function bath(){
+    //     let activity = "I dey bath...";
+    //     console.log(activity)
+    // };
+
+    // function eat(){
+    //     let activity = "I dey eat...";
+    //     console.log(activity)
+    // };
+
+    // function sleep(){
+    //     let activity = "I dey sleep...";
+    //     console.log(activity)
+    // };
+
+    // function code(){
+    //     let activity = "I dey code...";
+    //     console.log(activity)
+    // };
+
+
+    // const hum = "gabriel";
+
+    // console.log(Date());
+
+    // if (!imgLoaded(document.getElementById("connectimg"))) {
+    //     alert("Backend server down");
+    //     $( ".connectimg" ).remove();
+    //     window.location = "../logout"
+    // }
+
+    //$( ".connectimg" ).remove();
+
+    // function imgLoaded(imgElement) {
+    //     return imgElement.complete && imgElement.naturalHeight !== 0;
+    // }
+
+</script>    
+</body>
+</html>

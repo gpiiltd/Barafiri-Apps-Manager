@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=“Pragma” content=”no-cache”>
+    <meta http-equiv=“Expires” content=”-1″>
+    <meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
+    <link rel="stylesheet" href="./assets/css/navStyle.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap-grid.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./assets/css/hero.css">
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <title>Barafiri - Focusing on the details!</title>
+</head>
+<body>
+
+    <div class="cuss">
+    </div>
+    
+    <nav>
+
+        <div class="brand-mobile">
+            <img src="./assets/images/GPI-logo@2x.png" alt="">
+        </div>
+
+        <div class="menu-btn">
+            <i class="fa fa-ellipsis-v"></i>
+        </div>
+
+
+        <div class="navBucket hide">
+            <div class="navLeft">
+                <div class="brand">
+                    <img src="./assets/images/GPI-logo@2x.png" alt="">
+                </div>
+
+                <div class="navLinks">
+                    <ul>
+                        <li><a href="http://my-gpisuite.com"> About </a></li>
+                        <li><a href="register"> Register </a></li>
+                    </ul>
+
+                    <div class="navRight">
+                        <a href="login" class="sec-btn"> Login </a>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </nav>
+
+    <section class="hero-bucket">
+        <div class="hero-section">
+            <div class="hero-left">
+                <div class="hero-left-content">
+                    <h1 class="hero-title">My Barafiri</h1>
+                    <p class="hero-desc mt-4">Automation streamline for effective business processes orchestrations, towards improved accessibility, and enhanced productivity for the digial lifestyle.</p>
+
+                    <div id="get-started" class="btn b2 pri mt-5 btn-strk">
+                        <div class="btn-act"></div>
+                        Get started <i class="fa fa-arrow-right ar-r"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="hero-right-content">
+                    <div class="hero-image-bucket">
+                        <img src="./assets/images/girl.png" alt="photo of girl" class="hero-image">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="./assets/js/func.js"></script>
+
+    <script>
+        let cuss = document.querySelector('.cuss');
+
+        window.addEventListener('mousemove', (e)=>{
+            cuss.style.top = e.pageY + 'px';
+            cuss.style.left = e.pageX + 'px';
+            // console.log(e.pageX)
+
+        });
+
+        window.addEventListener('mousedown', (e) => {
+            // console.log(e);
+            cuss.style.width = '5rem';
+            cuss.style.height = '5rem';
+            cuss.style.opacity = '.5';
+        });
+        window.addEventListener('mouseup', (e) => {
+            // console.log(e);
+            cuss.style.width = '2rem';
+            cuss.style.height = '2rem';
+        });
+
+        if (localStorage.userObj != undefined) {
+            //console.log("Authentication Successful!!");
+            let gpiResponse = JSON.parse(localStorage.userObj);
+            if (gpiResponse.data.User != undefined) {
+                window.location.href = 'dashboard';
+            }
+            //alert("You Need to be looged in!");
+        }
+        console.log("Authentication UNSuccessful!!");
+        //let pageCheck = localStorage.userObj;
+        //console.log(pageCheck);
+
+        //
+    </script>
+</body>
+</html>

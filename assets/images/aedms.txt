@@ -1,0 +1,40 @@
+Aggregated Barafiri Data Management System
+
+This is an integrated system conceptually designed to ensure efficient digitization of personal education data of individuals, provide data management and reporting tools to relevant stakeholders.
+
+This system will be developed using the a feasible iteration model.
+
+Critical MVP for this design include:
+	1. Landing Page
+	2. User Management
+	3. User Dashboards
+	4. Services Subscriptions System
+	
+1.	LANDING PAGE
+		This Feature provides access to the following features/functionalities
+			1. Complete User Management System:
+				a. User sign up
+				b. User log-in
+			2. Unprotected Public contents and tools
+
+2.	User Management System
+		This Application is responsible for all user management functionalities...:
+			1. Login
+			2. Sign Up
+			3. User Update
+			4. Delete User
+			5. View User/Users
+			6. General Account Management
+
+3.	User Dashboards
+		The User Dashboards provide access to features and functionalities of accessible tools on the platform based on the currently active role of the user. There are a few roles public users 			can play on the system:
+				a. Unattended User - (essentially this is the application landing page)
+				b. Platform Administrator
+				c. School Owner/Tech Admin Dashboard
+				d. Teachers Dashboard
+				e. Parents Dashboard
+				f. Class Captain Dashboard
+				g. School Prefect/Officers Dashboard - (Futuristic)
+		
+		Each Dashboard essentially represents a complete application designed to meet the data management needs of the relevant user. 	
+

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=“Pragma” content=”no-cache”>
+    <meta http-equiv=“Expires” content=”-1″>
+    <meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
+    <link rel="stylesheet" href="../assets/css/navStyle.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-grid.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="../assets/css/hero.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../node_modules/@mdi/font/css/materialdesignicons.css">
+    <title>Barafiri</title>
+
+</head>
+<body>
+
+
+   <section class="login-bucket-holder">
+        <a href="../">
+            <div class="home-icon">
+                <!-- <i class="fa fa-home"></i> -->
+                <i class="mdi mdi-home"></i>
+            </div>
+        </a>
+
+       <div class="online-check">
+           <div class="oc-content">
+               <div>
+                <i class="mdi mdi-earth-remove icon2" style="margin-right: .5rem; color:white;"></i> 
+               </div> Sorry, you are offline. Please, check your internet connection
+           </div>
+       </div>
+       <div class="login-bucket">
+           <div class="login-bucket-content">
+
+            <div class="forms-holder">
+                <form action="" class="login-form">
+                    <div id="next" class="btt">
+                        Register <i class="fa fa-arrow-right ro l2"></i>
+                    </div>
+                    <div class="btt-bg"></div>
+
+                    <div class="fields">
+                        <div class="field">
+                            <input id="loginEmail" class="inputs" type="text" placeholder="Email">
+                            <div class="in-ic">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input id="loginPassword" class="inputs" type="text" placeholder="Password">
+                            <div class="in-ic hide">
+                                <i class="fa fa-eye fa-eye-slash"></i>
+                            </div>
+                        </div>
+
+
+
+                        <button type="button" id="login"  class="f-login svr-btn login">Login</button>
+                       
+                        
+                    </div>
+                </form>
+                <!-- <button id="enter">Enter</button> -->
+                <form action="" class="register-form">
+                    <div id="back" class="btt">
+                        <i class="fa fa-arrow-left ro r2"></i>Login
+                    </div>
+                    <div class="btt-bg"></div>
+
+                    <div class="fields">
+                        <div class="field">
+                            <input id="name" class="inputs" type="text" placeholder="Name">
+                            <div class="in-ic">
+                                <i class="fa fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input id="email" class="inputs" type="text" placeholder="Email">
+                            <div class="in-ic hide">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input id="phone" class="inputs" type="text" placeholder="Phone">
+                            <div class="in-ic hide">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input  id="gender" class="inputs" type="text" placeholder="Gender">
+                            <div class="in-ic hide">
+                                <i class="fa fa-venus-mars"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input  id="address" class="inputs" type="text" placeholder="Address">
+                            <div class="in-ic hide">
+                                <i class="fa fa-map-marker-alt"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input type="password" id="regPassword" class="inputs" placeholder="password">
+                            <div class="in-ic hide">
+                                <i class="fa fa-eye fa-eye-slash"></i>
+                            </div>
+                        </div>
+                        
+
+
+
+                        <button  id="registerBtn" type="button" class="f-login svr-btn">register</button>
+                       
+                        
+                    </div>
+
+
+                </form>
+            </div>
+           
+           
+        </div>
+
+        <div class="ft-text">
+            Copyright © GPI Barafiri 2020  <i class="fa fa-link" style="margin:1rem 1rem;" ></i> <a href="#">GPI</a>
+        </div>
+            
+               <!-- <button id="enter">Enter</button> -->
+          
+           
+           <div class="login-bucket-footer">
+
+           </div>
+       </div>
+   </section>
+
+  
+
+   <script src="../node_modules/jquery/dist/jquery.js"></script>
+   <script src="../a.js"></script>
+   <script>
+
+        $(document).ready( () => {
+            if (localStorage.userObj != undefined) {
+                window.location = "../dashboard";
+            }
+            
+            let bttBg = document.querySelectorAll('.btt-bg');
+            let btt = document.querySelectorAll('.btt');
+            let back = $('#back');
+            let next = $('#next');
+            let regForm = document.querySelector('.register-form');
+            let logForm = document.querySelector('.login-form');
+            let formsHolder = document.querySelector('.forms-holder');
+            let logBkt = document.querySelector('.login-bucket-content');
+
+            next.click( () => {
+                formsHolder.style.left = '-100%';
+                logBkt.style.height = regForm.scrollHeight + 'px';
+                formsHolder.style.height = regForm.scrollHeight + 'px';
+                // console.log(regForm)
+                
+            });
+            
+
+            let x ;
+            for (x = 0; x < btt.length; x++) {
+    
+                console.log(x)
+                bttBg[x].style.width = btt[x].scrollWidth + 'px';
+                bttBg[x].style.height = btt[x].scrollHeight + 'px';
+                bttBg[x].style.top = btt[x].offsetTop + 'px';
+                // bttBg[x].style.left = '-10px';
+                bttBg[x].style.left = -x * -50 + '%';
+                bttBg[x].style.opacity = '0';
+
+            
+                btt[x].addEventListener('mouseover', () => {
+                   
+                    let x;
+                    for (x = 0; x < btt.length; x++) {
+                        bttBg[x].style.left = btt[x].offsetLeft + 'px';
+                        bttBg[x].style.opacity = '1';
+                        // console.log(bttBg[x])
+                    }
+                })
+
+                btt[x].addEventListener('mouseout', () => {
+                 
+                    let x;
+                    for (x = 0; x < btt.length; x++) {
+                        // bttBg[x].style.left = '-10px';
+                        bttBg[x].style.left = -x * -50 + '%';
+                        bttBg[x].style.opacity = '0';
+                        // console.log(bttBg[x])
+                    }
+                })
+            }
+            
+
+            back.click( () => {
+                formsHolder.style.left = '0';
+                logBkt.style.height = logForm.scrollHeight + 'px';
+                formsHolder.style.height = logForm.scrollHeight + 'px';
+            });
+
+            next.click();
+
+           
+
+
+            // let 
+            // footer
+
+        });
+
+
+        // var url = 'http://localhost:5791/images/king.jpg';
+        // var image = new Image();
+        // image.id = "connectimg";
+        // image.name = "connectimg";
+        // image.src = url;
+        // //document.body.appendChild(image);
+
+        // image.onload = function()
+        // {
+        //     //alert("Server is up!");
+        // }
+
+        // image.onerror = function()
+        // {
+        //     alert("Server is down!");
+        //     window.location = "../";
+        // }
+        
+        // $("#"+image.id).remove();
+
+        // alert(imgLoaded(document.getElementById("connectimg")));
+
+        // if (!imgLoaded(document.getElementById("connectimg"))) {
+        //     alert("Backend server down");
+        //     //$( ".connectimg" ).remove();
+        //     window.location = "../"
+        // }
+
+        // $( ".connectimg" ).remove();
+
+        // function imgLoaded(imgElement) {
+        //     return imgElement.complete && imgElement.naturalHeight !== 0;
+        // }
+       
+   </script>
+    <!-- <script src="../assets/js/func.js"></script> -->
+   <script src="../b.js"></script>
+</body>
+</html>
